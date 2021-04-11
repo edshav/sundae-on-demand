@@ -1,8 +1,4 @@
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import SummaryForm from "./SummaryForm";
 
@@ -30,20 +26,25 @@ test("should disabled confirm button when checkbox is not checked", () => {
 
 test("popover responds to hover", async () => {
   render(<SummaryForm />);
-  const nullPopover = screen.queryByText(
+  const unvisiblePopover = screen.getByText(
     /no ice cream will actually be delivered/i
   );
-  expect(nullPopover).not.toBeInTheDocument();
+  expect(unvisiblePopover).not.toBeVisible();
 
   const termsAndConditions = screen.getByText(/terms and conditions/i);
   userEvent.hover(termsAndConditions);
-
-  await screen.findByText(/no ice cream will actually be delivered/i);
-  const popover = screen.getByText(/no ice cream will actually be delivered/i);
-  expect(popover).toBeInTheDocument();
+  await waitFor(() => {
+    const visiblePopover = screen.getByText(
+      /no ice cream will actually be delivered/i
+    );
+    expect(visiblePopover).toBeVisible();
+  });
 
   userEvent.unhover(termsAndConditions);
-  await waitForElementToBeRemoved(() =>
-    screen.queryByText(/no ice cream will actually be delivered/i)
-  );
+  await waitFor(() => {
+    const unvisiblePopoverAgain = screen.getByText(
+      /no ice cream will actually be delivered/i
+    );
+    expect(unvisiblePopoverAgain).not.toBeVisible();
+  });
 });

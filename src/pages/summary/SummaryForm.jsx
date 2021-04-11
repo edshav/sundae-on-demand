@@ -18,7 +18,7 @@ export default function SummaryForm() {
   const termsAndConditions = (
     <Text as="span">
       I agree to{" "}
-      <Popover trigger="hover" isLazy>
+      <Popover trigger="hover">
         <PopoverTrigger>
           <Text as="span" color="cyan.700" fontWeight="bold">
             Terms and Conditions
