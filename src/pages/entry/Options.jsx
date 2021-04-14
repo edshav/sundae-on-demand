@@ -1,10 +1,13 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { SimpleGrid } from "@chakra-ui/react";
+import AlertBanner from "shared/AlertBanner";
 import ScoopOptions from "./ScoopOptions";
+import ToppingOptions from "./ToppingOptions";
 
 export default function Options({ optionsType }) {
   const [items, setItems] = useState([]);
+  const [isError, setIsError] = useState();
 
   // optionsType is 'scoops' or 'toppings'
   useEffect(() => {
@@ -14,12 +17,16 @@ export default function Options({ optionsType }) {
         setItems(res.data);
       })
       .catch((err) => {
-        // TODO: handle error response
+        setIsError(true);
       });
   }, [optionsType]);
 
-  // TODO: replace `null` with ToppingOptions when available
-  const ItemComponent = optionsType === "scoops" ? ScoopOptions : null;
+  if (isError) {
+    return <AlertBanner />;
+  }
+
+  const ItemComponent =
+    optionsType === "scoops" ? ScoopOptions : ToppingOptions;
 
   const optionItems = items.map(({ name, imagePath }) => (
     <ItemComponent key={name} name={name} imagePath={imagePath} />

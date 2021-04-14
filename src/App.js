@@ -6,6 +6,7 @@ function App() {
     <div>
       <OrderSummary />
       <Options optionsType="scoops" />
+      <Options optionsType="toppings" />
     </div>
   );
 }
