@@ -1,7 +1,9 @@
 import { rest } from "msw";
+import { baseUrl } from "api/localApi";
+import { options } from "app-constants";
 
 export const handlers = [
-  rest.get("http://localhost:3030/scoops", (req, res, ctx) => {
+  rest.get(`${baseUrl}/${options.scoops}`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
@@ -11,7 +13,7 @@ export const handlers = [
     );
   }),
 
-  rest.get("http://localhost:3030/toppings", (req, res, ctx) => {
+  rest.get(`${baseUrl}/${options.toppings}`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
