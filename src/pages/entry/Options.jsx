@@ -7,28 +7,28 @@ import { options } from "app-constants";
 import ScoopOptions from "./ScoopOptions";
 import ToppingOptions from "./ToppingOptions";
 
-export default function Options({ optionsType }) {
+export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
   const [isError, setIsError] = useState();
 
-  // optionsType is 'scoops' or 'toppings'
+  // optionType is 'scoops' or 'toppings'
   useEffect(() => {
     localApi
-      .get(`/${optionsType}`)
+      .get(`/${optionType}`)
       .then((res) => {
         setItems(res.data);
       })
       .catch((err) => {
         setIsError(true);
       });
-  }, [optionsType]);
+  }, [optionType]);
 
   if (isError) {
     return <AlertBanner />;
   }
 
   const ItemComponent =
-    optionsType === options.scoops ? ScoopOptions : ToppingOptions;
+    optionType === options.scoops ? ScoopOptions : ToppingOptions;
 
   const optionItems = items.map(({ name, imagePath }) => (
     <ItemComponent key={name} name={name} imagePath={imagePath} />

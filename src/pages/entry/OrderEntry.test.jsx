@@ -6,14 +6,14 @@ import { options } from "app-constants";
 import OrderEntry from "./OrderEntry";
 
 test("hendles error for scoops and toppings routes", async () => {
-  server.resetHandlers([
+  server.resetHandlers(
     rest.get(`${baseUrl}/${options.scoops}`, (req, res, ctx) => {
       return res(ctx.status(500));
     }),
     rest.get(`${baseUrl}/${options.toppings}`, (req, res, ctx) => {
       return res(ctx.status(500));
-    }),
-  ]);
+    })
+  );
 
   render(<OrderEntry />);
 
