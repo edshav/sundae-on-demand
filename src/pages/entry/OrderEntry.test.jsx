@@ -1,10 +1,12 @@
-import { render, screen, waitFor } from "@testing-library/react";
 import { rest } from "msw";
 import { server } from "mocks/server";
 import { baseUrl } from "api/localApi";
 import { options } from "app-constants";
-import { OrderDetailsProvider } from "contexts/OrderDetails";
-
+import {
+  renderWithContext,
+  screen,
+  waitFor,
+} from "test-utils/testing-library-utils";
 import OrderEntry from "./OrderEntry";
 
 test("hendles error for scoops and toppings routes", async () => {
@@ -17,7 +19,7 @@ test("hendles error for scoops and toppings routes", async () => {
     })
   );
 
-  render(<OrderEntry />, { wrapper: OrderDetailsProvider });
+  renderWithContext(<OrderEntry />);
 
   await waitFor(() => {
     const alerts = screen.getAllByRole("alert");
