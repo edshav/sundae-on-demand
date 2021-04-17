@@ -3,6 +3,8 @@ import { rest } from "msw";
 import { server } from "mocks/server";
 import { baseUrl } from "api/localApi";
 import { options } from "app-constants";
+import { OrderDetailsProvider } from "contexts/OrderDetails";
+
 import OrderEntry from "./OrderEntry";
 
 test("hendles error for scoops and toppings routes", async () => {
@@ -15,7 +17,7 @@ test("hendles error for scoops and toppings routes", async () => {
     })
   );
 
-  render(<OrderEntry />);
+  render(<OrderEntry />, { wrapper: OrderDetailsProvider });
 
   await waitFor(() => {
     const alerts = screen.getAllByRole("alert");
