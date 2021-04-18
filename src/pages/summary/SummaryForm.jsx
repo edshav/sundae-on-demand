@@ -9,7 +9,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
-export default function SummaryForm() {
+export default function SummaryForm({ setPageToConfirmation }) {
   const [isChecked, setIsChecked] = useState(false);
   const onCheckboxChange = (e) => {
     setIsChecked(e.target.checked);
@@ -36,7 +36,11 @@ export default function SummaryForm() {
       <Checkbox colorScheme="cyan" onChange={onCheckboxChange}>
         {termsAndConditions}
       </Checkbox>
-      <Button colorScheme="cyan" isDisabled={!isChecked}>
+      <Button
+        colorScheme="cyan"
+        isDisabled={!isChecked}
+        onClick={setPageToConfirmation}
+      >
         Confirm order
       </Button>
     </VStack>

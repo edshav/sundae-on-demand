@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import SummaryForm from "./SummaryForm";
 
 test("initial condition", () => {
-  render(<SummaryForm />);
+  render(<SummaryForm setPageToConfirmation={jest.fn()} />);
   const agreeCheckbox = screen.getByRole("checkbox", {
     name: /terms and Conditions/i,
   });
@@ -13,7 +13,7 @@ test("initial condition", () => {
 });
 
 test("should disabled confirm button when checkbox is not checked", () => {
-  render(<SummaryForm />);
+  render(<SummaryForm setPageToConfirmation={jest.fn()} />);
   const agreeCheckbox = screen.getByRole("checkbox", {
     name: /terms and Conditions/i,
   });
@@ -25,7 +25,7 @@ test("should disabled confirm button when checkbox is not checked", () => {
 });
 
 test("popover responds to hover", async () => {
-  render(<SummaryForm />);
+  render(<SummaryForm setPageToConfirmation={jest.fn()} />);
   const unvisiblePopover = screen.getByText(
     /no ice cream will actually be delivered/i
   );

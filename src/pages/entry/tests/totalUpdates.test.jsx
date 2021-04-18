@@ -56,7 +56,7 @@ test("update topping subtotal when toppings change", async () => {
 
 describe("grand total", () => {
   test("grand total updates properly if scoop is added first", async () => {
-    renderWithContext(<OrderEntry />);
+    renderWithContext(<OrderEntry setPageToSummary={jest.fn()} />);
     const grandTotal = await screen.findByRole("heading", {
       name: /grand total: \$/i,
     });
@@ -77,7 +77,7 @@ describe("grand total", () => {
     expect(grandTotal).toHaveTextContent("5.50");
   });
   test("grand total updates properly if topping is added first", async () => {
-    renderWithContext(<OrderEntry />);
+    renderWithContext(<OrderEntry setPageToSummary={jest.fn()} />);
     const grandTotal = await screen.findByRole("heading", {
       name: /grand total: \$/i,
     });
@@ -96,7 +96,7 @@ describe("grand total", () => {
     expect(grandTotal).toHaveTextContent("3.50");
   });
   test("grand total updates properly if item is removed", async () => {
-    renderWithContext(<OrderEntry />);
+    renderWithContext(<OrderEntry setPageToSummary={jest.fn()} />);
     const grandTotal = await screen.findByRole("heading", {
       name: /grand total: \$/i,
     });

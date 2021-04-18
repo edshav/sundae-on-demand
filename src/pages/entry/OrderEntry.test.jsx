@@ -19,7 +19,7 @@ test("hendles error for scoops and toppings routes", async () => {
     })
   );
 
-  renderWithContext(<OrderEntry />);
+  renderWithContext(<OrderEntry setPageToSummary={jest.fn()} />);
 
   await waitFor(() => {
     const alerts = screen.getAllByRole("alert");

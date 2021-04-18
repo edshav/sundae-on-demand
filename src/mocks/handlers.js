@@ -1,9 +1,8 @@
 import { rest } from "msw";
 import { baseUrl } from "api/localApi";
-import { options } from "app-constants";
 
 export const handlers = [
-  rest.get(`${baseUrl}/${options.scoops}`, (req, res, ctx) => {
+  rest.get(`${baseUrl}/scoops`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
@@ -13,7 +12,7 @@ export const handlers = [
     );
   }),
 
-  rest.get(`${baseUrl}/${options.toppings}`, (req, res, ctx) => {
+  rest.get(`${baseUrl}/toppings`, (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json([
@@ -22,5 +21,9 @@ export const handlers = [
         { name: "Hot fudge", imagePath: "/images/hot-fudge.png" },
       ])
     );
+  }),
+
+  rest.post(`${baseUrl}/order`, (req, res, ctx) => {
+    return res(ctx.status(201), ctx.json({ orderNumber: 1234567890 }));
   }),
 ];
