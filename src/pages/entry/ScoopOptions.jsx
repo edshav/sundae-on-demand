@@ -12,6 +12,7 @@ import { baseUrl } from "api/localApi";
 
 export default function ScoopOptions({ name, imagePath, updateItemCount }) {
   const handleChange = (value) => {
+    if (parseInt(value) < 0) return;
     updateItemCount(name, value);
   };
   return (
@@ -19,7 +20,13 @@ export default function ScoopOptions({ name, imagePath, updateItemCount }) {
       <img src={`${baseUrl}/${imagePath}`} alt={`${name} scoop`} />
       <FormControl id={`${name}-count`}>
         <FormLabel>{name}</FormLabel>
-        <NumberInput defaultValue={0} onChange={handleChange}>
+        <NumberInput
+          defaultValue={0}
+          inputMode="numeric"
+          min={0}
+          max={10}
+          onChange={handleChange}
+        >
           <NumberInputField />
           <NumberInputStepper>
             <NumberIncrementStepper />

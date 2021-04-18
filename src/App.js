@@ -1,14 +1,14 @@
 import { Container } from "@chakra-ui/react";
 import { OrderDetailsProvider } from "contexts/OrderDetails";
-import OrderSummary from "./pages/summary/OrderSummary";
+// import OrderSummary from "./pages/summary/OrderSummary";
 import OrderEntry from "./pages/entry/OrderEntry";
 
 function App() {
   return (
-    <Container>
+    <Container maxWidth="90ch">
       <OrderDetailsProvider>
-        <OrderSummary />
         <OrderEntry />
+        {/* <OrderSummary /> */}
       </OrderDetailsProvider>
     </Container>
   );

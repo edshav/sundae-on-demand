@@ -45,12 +45,14 @@ export default function Options({ optionType }) {
 
   return (
     <>
-      <Heading as="h2">{title}</Heading>
+      <Heading as="h2" mt={3}>
+        {title}
+      </Heading>
       <Text>{pricePerItem[optionType]} each</Text>
       <Text>
         {title} total: {orderDetails.totals[optionType]} each
       </Text>
-      <SimpleGrid columns={[1, 2, 3]} spacing={10}>
+      <SimpleGrid columns={[1, 2, 4]} spacing={10}>
         {optionItems}
       </SimpleGrid>
     </>
