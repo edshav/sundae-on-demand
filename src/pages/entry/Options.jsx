@@ -6,6 +6,7 @@ import { options, pricePerItem } from "app-constants";
 import { useOrderDetails } from "contexts/OrderDetails";
 import ScoopOptions from "./ScoopOptions";
 import ToppingOptions from "./ToppingOptions";
+import { formatCurrency } from "utils";
 
 export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
@@ -48,9 +49,9 @@ export default function Options({ optionType }) {
       <Heading as="h2" mt={3}>
         {title}
       </Heading>
-      <Text>{pricePerItem[optionType]} each</Text>
+      <Text>{formatCurrency(pricePerItem[optionType])} each</Text>
       <Text>
-        {title} total: {orderDetails.totals[optionType]} each
+        {title} total: {orderDetails.totals[optionType]}
       </Text>
       <SimpleGrid columns={[1, 2, 4]} spacing={10}>
         {optionItems}
