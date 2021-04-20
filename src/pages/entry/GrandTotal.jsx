@@ -1,9 +1,9 @@
-import { Heading } from "@chakra-ui/react";
+import H2Heading from "shared/H2Heading";
 import { useOrderDetails } from "contexts/OrderDetails";
 
 export default function GrandTotal() {
   const [orderDetails] = useOrderDetails();
   return (
-    <Heading as="h2">Grand total: {orderDetails.totals.grandTotal}</Heading>
+    <H2Heading my={12}>Grand total: {orderDetails.totals.grandTotal}</H2Heading>
   );
 }

@@ -1,4 +1,4 @@
-import { Box, Checkbox } from "@chakra-ui/react";
+import { Box, Checkbox, Image } from "@chakra-ui/react";
 import { baseUrl } from "api/localApi";
 
 export default function ToppingOptions({ name, imagePath, updateItemCount }) {
@@ -9,7 +9,7 @@ export default function ToppingOptions({ name, imagePath, updateItemCount }) {
 
   return (
     <Box>
-      <img src={`${baseUrl}/${imagePath}`} alt={`${name} topping`} />
+      <Image src={`${baseUrl}/${imagePath}`} alt={`${name} topping`} w="75%" />
       <Checkbox onChange={handleChange}>{name}</Checkbox>
     </Box>
   );

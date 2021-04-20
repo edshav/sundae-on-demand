@@ -36,7 +36,7 @@ function App() {
   }
 
   return (
-    <Container maxWidth="90ch" py={12}>
+    <Container maxWidth="90ch" py={24}>
       <OrderDetailsProvider>{CurrentComponent}</OrderDetailsProvider>
     </Container>
   );

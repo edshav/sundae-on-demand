@@ -2,6 +2,7 @@ import {
   Box,
   FormControl,
   FormLabel,
+  Image,
   NumberInput,
   NumberInputField,
   NumberInputStepper,
@@ -17,7 +18,7 @@ export default function ScoopOptions({ name, imagePath, updateItemCount }) {
   };
   return (
     <Box>
-      <img src={`${baseUrl}/${imagePath}`} alt={`${name} scoop`} />
+      <Image src={`${baseUrl}/${imagePath}`} alt={`${name} scoop`} w="75%" />
       <FormControl id={`${name}-count`}>
         <FormLabel>{name}</FormLabel>
         <NumberInput

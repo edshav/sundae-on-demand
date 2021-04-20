@@ -1,6 +1,5 @@
 import { useState } from "react";
 import {
-  Button,
   Checkbox,
   Popover,
   PopoverBody,
@@ -9,6 +8,7 @@ import {
   Text,
   VStack,
 } from "@chakra-ui/react";
+import PrimaryButton from "shared/PrimaryButton";
 export default function SummaryForm({ setPageToConfirmation }) {
   const [isChecked, setIsChecked] = useState(false);
   const onCheckboxChange = (e) => {
@@ -32,17 +32,17 @@ export default function SummaryForm({ setPageToConfirmation }) {
   );
 
   return (
-    <VStack w="400px" spacing={4}>
+    <VStack w="400px" spacing={4} mx="auto" mt={16}>
       <Checkbox colorScheme="cyan" onChange={onCheckboxChange}>
         {termsAndConditions}
       </Checkbox>
-      <Button
+      <PrimaryButton
         colorScheme="cyan"
         isDisabled={!isChecked}
         onClick={setPageToConfirmation}
       >
         Confirm order
-      </Button>
+      </PrimaryButton>
     </VStack>
   );
 }

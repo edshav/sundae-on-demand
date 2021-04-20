@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
-import { Heading, SimpleGrid, Text } from "@chakra-ui/react";
+import { SimpleGrid, Text } from "@chakra-ui/react";
 import AlertBanner from "shared/AlertBanner";
 import { localApi } from "api/localApi";
 import { options, pricePerItem } from "app-constants";
+import { formatCurrency } from "utils";
+import H2Heading from "shared/H2Heading";
 import { useOrderDetails } from "contexts/OrderDetails";
 import ScoopOptions from "./ScoopOptions";
 import ToppingOptions from "./ToppingOptions";
-import { formatCurrency } from "utils";
 
 export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
@@ -46,14 +47,12 @@ export default function Options({ optionType }) {
 
   return (
     <>
-      <Heading as="h2" mt={3}>
-        {title}
-      </Heading>
+      <H2Heading mt={3}>{title}</H2Heading>
       <Text>{formatCurrency(pricePerItem[optionType])} each</Text>
       <Text>
         {title} total: {orderDetails.totals[optionType]}
       </Text>
-      <SimpleGrid columns={[1, 2, 4]} spacing={10}>
+      <SimpleGrid columns={[1, 2, 3, 4]} spacing={10} mt={4}>
         {optionItems}
       </SimpleGrid>
     </>
