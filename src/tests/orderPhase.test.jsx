@@ -1,5 +1,6 @@
 import {
   renderWithContext,
+  render,
   screen,
   within,
 } from "test-utils/testing-library-utils";
@@ -109,4 +110,22 @@ test("order phases for happy path", async () => {
   // happing after test is over
   await screen.findByRole("spinbutton", { name: "Vanilla" });
   await screen.findByRole("checkbox", { name: "Cherries" });
+});
+
+test("conditional toppings section on summary page", async () => {
+  render(<App />);
+
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: /vanilla/i,
+  });
+  userEvent.clear(vanillaInput);
+  userEvent.type(vanillaInput, "2");
+
+  const orderButton = screen.getByRole("button", { name: /order/i });
+  userEvent.click(orderButton);
+
+  const toppingsTotal = screen.queryByRole("heading", {
+    name: /toppings:/i,
+  });
+  expect(toppingsTotal).not.toBeInTheDocument();
 });

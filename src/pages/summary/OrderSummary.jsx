@@ -6,6 +6,12 @@ import H2Heading from "shared/H2Heading";
 
 export default function OrderSummary({ setPageToConfirmation }) {
   const [orderDetails] = useOrderDetails();
+
+  const toppingsTotal =
+    orderDetails.totals.toppings === "$0.00" ? null : (
+      <H2Heading py={3}>Toppings: {orderDetails.totals.toppings}</H2Heading>
+    );
+
   return (
     <>
       <H1Heading>Order summary</H1Heading>
@@ -15,7 +21,7 @@ export default function OrderSummary({ setPageToConfirmation }) {
           <ListItem key={name}>{`${amount} ${name}`}</ListItem>
         ))}
       </UnorderedList>
-      <H2Heading py={3}>Toppings: {orderDetails.totals.toppings}</H2Heading>
+      {toppingsTotal}
       <UnorderedList aria-label="toppings">
         {Array.from(orderDetails.toppings).map(([name, amount]) => (
           <ListItem key={name}>{name}</ListItem>
