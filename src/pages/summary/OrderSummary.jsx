@@ -1,14 +1,15 @@
 import { UnorderedList, ListItem } from "@chakra-ui/react";
 import { useOrderDetails } from "contexts/OrderDetails";
-import SummaryForm from "./SummaryForm";
+import { formatCurrency } from "utils";
 import H1Heading from "shared/H1Heading";
 import H2Heading from "shared/H2Heading";
+import SummaryForm from "./SummaryForm";
 
 export default function OrderSummary({ setPageToConfirmation }) {
   const [orderDetails] = useOrderDetails();
 
   const toppingsTotal =
-    orderDetails.totals.toppings === "$0.00" ? null : (
+    orderDetails.totals.toppings === formatCurrency(0) ? null : (
       <H2Heading py={3}>Toppings: {orderDetails.totals.toppings}</H2Heading>
     );
 

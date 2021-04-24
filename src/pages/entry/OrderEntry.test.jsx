@@ -1,3 +1,4 @@
+import userEvent from "@testing-library/user-event";
 import { rest } from "msw";
 import { server } from "mocks/server";
 import { baseUrl } from "api/localApi";
@@ -25,4 +26,21 @@ test("hendles error for scoops and toppings routes", async () => {
     const alerts = screen.getAllByRole("alert");
     expect(alerts).toHaveLength(2);
   });
+});
+
+test("disable order button if no scoops ordered", async () => {
+  renderWithContext(<OrderEntry setPageToSummary={jest.fn()} />);
+  const orderButton = screen.getByRole("button", { name: /order/i });
+  expect(orderButton).toBeDisabled();
+
+  const vanillaInput = await screen.findByRole("spinbutton", {
+    name: /vanilla/i,
+  });
+  userEvent.clear(vanillaInput);
+  userEvent.type(vanillaInput, "1");
+  expect(orderButton).toBeEnabled();
+
+  userEvent.clear(vanillaInput);
+  userEvent.type(vanillaInput, "0");
+  expect(orderButton).toBeDisabled();
 });

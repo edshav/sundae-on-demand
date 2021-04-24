@@ -7,6 +7,7 @@ import {
 
 import userEvent from "@testing-library/user-event";
 import App from "../App";
+import { formatCurrency } from "utils";
 
 test("order phases for happy path", async () => {
   // render App
@@ -44,7 +45,7 @@ test("order phases for happy path", async () => {
   const scoopsSubtotal = screen.getByRole("heading", {
     name: /scoops:/i,
   });
-  expect(scoopsSubtotal).toHaveTextContent("$6.00");
+  expect(scoopsSubtotal).toHaveTextContent(formatCurrency(6));
 
   const scoopsList = screen.getByRole("list", { name: /scoops/i });
   const { getAllByRole: getAllByRoleWithinScoops } = within(scoopsList);
@@ -55,7 +56,7 @@ test("order phases for happy path", async () => {
   const toppingsSubtotal = screen.getByRole("heading", {
     name: /toppings:/i,
   });
-  expect(toppingsSubtotal).toHaveTextContent("$4.50");
+  expect(toppingsSubtotal).toHaveTextContent(formatCurrency(4.5));
 
   const toppingsList = screen.getByRole("list", { name: /toppings/i });
   const { getAllByRole: getAllByRoleWithinToppings } = within(toppingsList);
@@ -64,7 +65,7 @@ test("order phases for happy path", async () => {
   expect(toppingsItemTexts).toEqual(["Hot fudge", "M&Ms", "Cherries"]);
 
   const grandTotal = await screen.findByRole("heading", { name: /total/i });
-  expect(grandTotal).toHaveTextContent("$10.50");
+  expect(grandTotal).toHaveTextContent(formatCurrency(10.5));
 
   // accept terms and conditions and click button to confirm order
   const termsAndConditions = await screen.findByRole("checkbox", {
