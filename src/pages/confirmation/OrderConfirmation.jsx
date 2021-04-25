@@ -4,10 +4,12 @@ import { useOrderDetails } from "contexts/OrderDetails";
 import { localApi } from "api/localApi";
 import H1Heading from "shared/H1Heading";
 import PrimaryButton from "shared/PrimaryButton";
+import AlertBanner from "shared/AlertBanner";
 
 function OrderConfirmation({ setPageToEntry }) {
   const [, , resetItemCount] = useOrderDetails();
   const [orderNumber, setOrderNumber] = useState("");
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     localApi
@@ -15,8 +17,8 @@ function OrderConfirmation({ setPageToEntry }) {
       .then((res) => {
         setOrderNumber(res.data.orderNumber);
       })
-      .catch((error) => {
-        // TODO: handle error here
+      .catch((err) => {
+        setIsError(true);
       });
   }, []);
 
@@ -24,9 +26,11 @@ function OrderConfirmation({ setPageToEntry }) {
     resetItemCount();
     setPageToEntry();
   };
-  return !orderNumber ? (
-    <>Loading...</>
-  ) : (
+
+  if (isError) return <AlertBanner />;
+  if (!orderNumber) return <>Loading...</>;
+
+  return (
     <Box textAlign="center">
       <H1Heading textAlign="center">Thank you!</H1Heading>
       <Text textAlign="center">

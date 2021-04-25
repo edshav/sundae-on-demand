@@ -4,7 +4,7 @@ export const options = {
 };
 
 export const defaultErrorMessage =
-  "An unexpected error occured. Please try again later.";
+  "An unexpected error occurred. Please try again later.";
 
 export const pricePerItem = {
   scoops: 2,

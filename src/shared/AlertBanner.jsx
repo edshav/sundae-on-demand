@@ -6,7 +6,11 @@ export default function AlertBanner({
   alertStatus = "error",
 }) {
   return (
-    <Alert status={alertStatus} variant="subtle">
+    <Alert
+      // @ts-ignore
+      status={alertStatus}
+      variant="subtle"
+    >
       <AlertIcon />
       {alertMessage}
     </Alert>
