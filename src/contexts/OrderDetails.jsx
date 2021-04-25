@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useMemo, useEffect } from "react";
 import { options, pricePerItem } from "app-constants";
-import { formatCurrency } from "utils";
+import { formatCurrency, isNotNegativeInt } from "utils";
 
 // @ts-ignore
 const OrderDetails = createContext();
@@ -51,6 +51,7 @@ export function OrderDetailsProvider(props) {
 
   const value = useMemo(() => {
     function updateItemCount(itemName, newItemCount, optionType) {
+      if (!isNotNegativeInt(newItemCount)) return;
       setOptionCounts((prevState) => {
         // get option Map and make a copy
         const { [optionType]: optionMap } = prevState;

@@ -11,18 +11,14 @@ import {
 } from "@chakra-ui/react";
 import { baseUrl } from "api/localApi";
 import { useState } from "react";
+import { isNotNegativeInt } from "utils";
 
 export default function ScoopOption({ name, imagePath, updateItemCount }) {
-  const [isInvalid, setIsInvalid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const handleChange = (value) => {
     updateItemCount(name, value);
 
-    const valueFloat = parseFloat(value);
-    setIsInvalid(
-      0 >= valueFloat ||
-        valueFloat >= 10 ||
-        Math.floor(valueFloat) !== valueFloat
-    );
+    setIsValid(isNotNegativeInt(value));
   };
   return (
     <Box>
@@ -30,7 +26,7 @@ export default function ScoopOption({ name, imagePath, updateItemCount }) {
       <FormControl id={`${name}-count`}>
         <FormLabel>{name}</FormLabel>
         <NumberInput
-          isInvalid={isInvalid}
+          isInvalid={!isValid}
           defaultValue={0}
           inputMode="numeric"
           onChange={handleChange}
