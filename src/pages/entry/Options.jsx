@@ -6,8 +6,8 @@ import { options, pricePerItem } from "app-constants";
 import { formatCurrency } from "utils";
 import H2Heading from "shared/H2Heading";
 import { useOrderDetails } from "contexts/OrderDetails";
-import ScoopOptions from "./ScoopOptions";
-import ToppingOptions from "./ToppingOptions";
+import ScoopOption from "./ScoopOption";
+import ToppingOption from "./ToppingOption";
 
 export default function Options({ optionType }) {
   const [items, setItems] = useState([]);
@@ -31,7 +31,7 @@ export default function Options({ optionType }) {
   }
 
   const ItemComponent =
-    optionType === options.scoops ? ScoopOptions : ToppingOptions;
+    optionType === options.scoops ? ScoopOption : ToppingOption;
   const title = optionType[0].toUpperCase() + optionType.slice(1).toLowerCase();
 
   const optionItems = items.map(({ name, imagePath }) => (

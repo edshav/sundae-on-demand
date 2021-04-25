@@ -1,7 +1,7 @@
 import { Box, Checkbox, Image } from "@chakra-ui/react";
 import { baseUrl } from "api/localApi";
 
-export default function ToppingOptions({ name, imagePath, updateItemCount }) {
+export default function ToppingOption({ name, imagePath, updateItemCount }) {
   const handleChange = (e) => {
     const value = e.target.checked ? 1 : 0;
     updateItemCount(name, value);

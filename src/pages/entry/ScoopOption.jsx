@@ -10,11 +10,19 @@ import {
   NumberDecrementStepper,
 } from "@chakra-ui/react";
 import { baseUrl } from "api/localApi";
+import { useState } from "react";
 
-export default function ScoopOptions({ name, imagePath, updateItemCount }) {
+export default function ScoopOption({ name, imagePath, updateItemCount }) {
+  const [isInvalid, setIsInvalid] = useState(false);
   const handleChange = (value) => {
-    if (parseInt(value) < 0) return;
     updateItemCount(name, value);
+
+    const valueFloat = parseFloat(value);
+    setIsInvalid(
+      0 >= valueFloat ||
+        valueFloat >= 10 ||
+        Math.floor(valueFloat) !== valueFloat
+    );
   };
   return (
     <Box>
@@ -22,10 +30,9 @@ export default function ScoopOptions({ name, imagePath, updateItemCount }) {
       <FormControl id={`${name}-count`}>
         <FormLabel>{name}</FormLabel>
         <NumberInput
+          isInvalid={isInvalid}
           defaultValue={0}
           inputMode="numeric"
-          min={0}
-          max={10}
           onChange={handleChange}
         >
           <NumberInputField />
